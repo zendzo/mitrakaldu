@@ -47,7 +47,6 @@ class UploadDocumentController extends Controller
 
         try {
             RequirementDocument::create([
-                'name'  =>  $input['name'],
                 'user_id'   =>  Auth::id(),
                 'document_type_id'  =>  $input['document_type_id'],
                 'location'  =>  $input['location'],
