@@ -17,13 +17,14 @@ Route::group(['prefix'=>'user','as'=>'user.'], function(){
 
 	Route::resource('/profile','UserProfileController',['only' => ['show','update']]);
 
+	Route::resource('documents','UploadDocumentController')	;
 	
 });
 
 
 Route::get('/user/profile/{id}','UserProfileController@show');
 
-Route::view('test', 'test.page');
+Route::view('test', 'documents.upload_form');
 
 Auth::routes();
 

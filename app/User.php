@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role');
     }
+
+    public function requirementDocuments()
+    {
+        return $this->hasMany('App\RequirementDocument','user_id');
+    }
 }

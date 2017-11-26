@@ -15,6 +15,11 @@ class CreateRequirementDocumentsTable extends Migration
     {
         Schema::create('requirement_documents', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('document_type_id');
+            $table->boolean('approved')->default(false);
+            $table->string('location')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

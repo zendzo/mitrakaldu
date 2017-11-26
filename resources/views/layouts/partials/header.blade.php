@@ -1,7 +1,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">{{ config('app.name') }}</a>
+            <a href="{{ route('home') }}" class="logo">{{ config('app.name') }}</a>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\RequirementDocument;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,8 @@ class HomeController extends Controller
     {
         $page_title = "Home";
 
-        return view('home',compact(['page_title']));
+        $RD = Auth::user()->requirementDocuments;
+
+        return view('home',compact(['page_title','RD']));
     }
 }

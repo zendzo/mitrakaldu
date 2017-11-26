@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(GenderAndMarriedStatusSeeder::class);
+        $this->call(DocumentTypeTableSeeder::class);
     }
 }

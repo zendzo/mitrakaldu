@@ -12,7 +12,7 @@
           <!-- /.box -->
 
           <!-- About Me Box -->
-          @include('profile.user_about')
+          {{-- @include('profile.user_about') --}}
 
           <!-- /.box -->
         </div>
