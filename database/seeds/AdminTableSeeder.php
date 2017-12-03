@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 
 use Carbon\Carbon;
-use Faker\Factory;
+use Faker\Factory as Faker;
 
 class AdminTableSeeder extends Seeder
 {
@@ -28,7 +28,6 @@ class AdminTableSeeder extends Seeder
 	        $user->profile_id = 1;
 	        $user->profile_id = 1;
 	        $user->gender_id = 1;
-	        $user->married_status_id = 1;
 	        $user->married_status_id = 1;
 	        $user->active = true;
 	        $user->save();

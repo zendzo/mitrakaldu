@@ -17,7 +17,7 @@
 @section('content')
 <div class="register-box">
   <div class="register-logo">
-    <b><h3>{{ config('app.name') }}</h3></b>
+    <a href="/"><b>{{ config('app.name') }}</b></a>
   </div>
 
   <div class="register-box-body">

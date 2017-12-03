@@ -25,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // redirect to admin page is user is ad administrator
+        if (Auth::user()->role_id === 1) {
+            return redirect('/admin');
+        }
+        
         $page_title = "Home";
 
         $RD = Auth::user()->requirementDocuments;

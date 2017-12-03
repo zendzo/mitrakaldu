@@ -57,4 +57,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\RequirementDocument','user_id');
     }
+
+    public function gender()
+    {
+        return $this->belongsTo('App\Gender');
+    }
+
+    public function marriedStatus()
+    {
+        return $this->belongsTo('App\MarriedStatus');
+    }
+
+    public function rumah()
+    {
+        return $this->hasOne('App\Rumah');
+    }
 }

@@ -1,4 +1,5 @@
 <!-- /.tab-pane -->
+
 <div class="tab-pane" id="settings">
   <form class="form-horizontal"  action="{{ route('user.profile.update',$user->id) }}" enctype="multipart/form-data" method="POST">
     {{ csrf_field() }}
@@ -32,7 +33,6 @@
       </div>
     </div>
 
-
     <div class="form-group">
       <label for="email" class="col-sm-2 control-label">Email</label>
 
@@ -56,6 +56,60 @@
         @if ($errors->has('phone'))
             <span class="help-block">
                 <strong>{{ $errors->first('phone') }}</strong>
+            </span>
+        @endif
+      </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('gender_id') ? ' has-error' : '' }}">
+      <label for="gender_id" class="col-sm-2 control-label">Jenis Kelamin</label>
+
+      <div class="col-sm-10">
+
+        <select class="form-control" name="gender_id" id="gender_id">
+          <option value="1">Laki-Laki</option>  
+          <option value="2">Perempuan</option>
+        </select>
+
+        @if ($errors->has('gender_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('gender_id') }}</strong>
+            </span>
+        @endif
+      </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
+        <label for="active" class="col-sm-2 control-label">Aktif</label>
+
+        <div class="col-sm-10">
+
+          <select class="form-control" name="active" id="active">
+            <option value="1">Aktif</option>  
+            <option value="0">Unaktif</option>
+          </select>
+
+          @if ($errors->has('active'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('active') }}</strong>
+              </span>
+          @endif
+        </div>
+      </div>
+
+    <div class="form-group{{ $errors->has('married_status_id') ? ' has-error' : '' }}">
+      <label for="married_status_id" class="col-sm-2 control-label">Status</label>
+
+      <div class="col-sm-10">
+
+        <select class="form-control" name="married_status_id" id="married_status_id">
+          <option value="1">Lajang</option>  
+          <option value="2">Menikah</option>
+        </select>
+
+        @if ($errors->has('married_status_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('married_status_id') }}</strong>
             </span>
         @endif
       </div>

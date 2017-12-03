@@ -32,15 +32,9 @@
       <li class="header">MENU</li>
       <!-- if user is admin show menu -->
       @if(Auth::user()->role_id === 1)
-       {{--  @include('admin.menu_pembelian')
-        @include('admin.menu_penjulan')
-        @include('admin.menu_transaksi')
-        @include('admin.menu_pelanggan')
-        @include('admin.menu_master_data')
-        @include('admin.menu_gudang')
-        @include('admin.menu_truck')
-        @include('admin.menu_laporan')
-        @include('admin.menu_admin') --}}
+        @include('admin.menu_pengguna')
+        @include('admin.menu_rumah')
+        @include('admin.menu_angsuran')
       @endif
 
       <!-- user menu -->

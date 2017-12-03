@@ -21,45 +21,32 @@
                 <tbody>
                 <tr>
                   <th>ID</th>
-                  <th>User</th>
-                  <th>Date</th>
+                  <th>Dokumen Persyaratan</th>
+                  <th>Tanggal Upload</th>
                   <th>Status</th>
-                  <th>Reason</th>
-                  <th>Action</th>
+                  <th>Keterangan</th>
                 </tr>
+                @forelse (Auth::user()->requirementDocuments as $r)
+                  <tr>
+                    <td>{{ $r->id }}</td>
+                    <td>{{ $r->documentType->name }} - {{ $r->documentType->keterangan }}</td>
+                    <td>{{ $r->created_at->format('d-m-Y') }}</td>
+                    <td>
+                      @if ($r->approved)
+                        <span class="label label-success">Diterima</span>
+                      @else
+                        <span class="label label-warning">Proses</span>
+                      @endif
+                    </td>
+                    <td>{{ $r->keterangan }}</td>
+                 </tr>
+                @empty
                 <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-success">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  <td><a class="btn btn-primary" href="#"><i class="fa fa-fw fa-upload"></i> Upload</a></td>
+                  <td colspan="5"><h3 class="text-center">empty</h3></td>
                 </tr>
-                <tr>
-                  <td>219</td>
-                  <td>Alexander Pierce</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-warning">Pending</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  <td><a class="btn btn-primary" href="#"><i class="fa fa-fw fa-upload"></i> Upload</a></td>
-                </tr>
-                <tr>
-                  <td>657</td>
-                  <td>Bob Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-primary">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  <td><a class="btn btn-primary" href="#"><i class="fa fa-fw fa-upload"></i> Upload</a></td>
-                </tr>
-                <tr>
-                  <td>175</td>
-                  <td>Mike Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-danger">Denied</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  <td><a class="btn btn-primary" href="#"><i class="fa fa-fw fa-upload"></i> Upload</a></td>
-                </tr>
-              </tbody></table>
+                @endforelse
+              </tbody>
+            </table>
             </div>
             <!-- /.box-body -->
           </div>

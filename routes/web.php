@@ -11,6 +11,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 		'uses'	=>	'AdminController@index'
 	]);
 
+	Route::resource('pelanggan','PelangganController');
+
+	Route::resource('rumah','RumahController');
+
+	Route::resource('angsuran','AngsuranController');
+
 });
 
 Route::group(['prefix'=>'user','as'=>'user.'], function(){
