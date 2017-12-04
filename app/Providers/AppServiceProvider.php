@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
 use App\RumahType;
+use App\Perumahan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
         if (! $this->app->runningInConsole()) {
 
             View::share('type_rumah', RumahType::all());
+
+            View::share('perumahan_id', Perumahan::all());
         
         }
     }

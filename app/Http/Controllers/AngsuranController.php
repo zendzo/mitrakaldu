@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Angsuran;
 
 class AngsuranController extends Controller
 {
@@ -15,7 +16,9 @@ class AngsuranController extends Controller
     {
         $page_title = "Daftar Angsuran";
 
-        return view('angsuran.index',compact(['page_title']));
+        $angsuran = Angsuran::all();
+
+        return view('angsuran.index',compact(['page_title','angsuran']));
     }
 
     /**

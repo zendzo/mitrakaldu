@@ -9,6 +9,7 @@ class Rumah extends Model
 
 	protected $fillable = [
 		'rumah_type_id',
+		'perumahan_id',
 		'block',
 		'no',
 		'subsidi',
@@ -16,7 +17,7 @@ class Rumah extends Model
 		'deposit',
 		'angsuran',
 		'booked_by',
-		'upload',
+		'location',
 	];
 
 	public function getDepositAttribute($value)
@@ -37,5 +38,15 @@ class Rumah extends Model
     public function bookedBy()
     {
     	return $this->belongsTo('App\User','booked_by');
+    }
+
+    public function cicilan()
+    {
+    	return $this->hasMany('App\Angsuran');
+    }
+
+    public function perumahan()
+    {
+    	return $this->belongsTo('App\Perumahan','perumahan_id');
     }
 }

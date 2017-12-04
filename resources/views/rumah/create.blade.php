@@ -10,7 +10,7 @@
             </div>
             <!-- /.box-header --> 
           <div class="box-body">
-            <form class="form-horizontal"  action="{{ route('admin.rumah.store') }}" method="POST">
+            <form class="form-horizontal"  action="{{ route('admin.rumah.store') }}" method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
 
               <div class="form-group{{ $errors->has('product_type_id') ? ' has-error' : '' }}">
@@ -24,6 +24,24 @@
                   </select>
 
                   @if ($errors->has('product_type_id'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('rumah_type_id') }}</strong>
+                      </span>
+                  @endif
+                </div>
+              </div>
+
+              <div class="form-group{{ $errors->has('perumahan_id') ? ' has-error' : '' }}">
+                <label for="perumahan_id" class="col-sm-2 control-label">Tipe Rumah</label>
+
+                <div class="col-sm-8">
+                 <select class="form-control" name="perumahan_id">
+                    @foreach ($perumahan_id as $perumahan)
+                      <option value="{{ $perumahan->id }}">{{ $perumahan->nama }} - {{ $perumahan->alamat }}</option>
+                    @endforeach
+                  </select>
+
+                  @if ($errors->has('perumahan_id'))
                       <span class="help-block">
                           <strong>{{ $errors->first('rumah_type_id') }}</strong>
                       </span>
@@ -90,15 +108,15 @@
                 </div>
               </div>
 
-              <div class="form-group{{ $errors->has('upload') ? ' has-error' : '' }}">
-                <label for="upload" class="col-sm-2 control-label">upload</label>
+              <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                <label for="location" class="col-sm-2 control-label">location</label>
 
                 <div class="col-sm-8">
-                  <input id="upload" name="upload" type="file">
+                  <input id="location" name="location" type="file">
 
-                  @if ($errors->has('upload'))
+                  @if ($errors->has('location'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('upload') }}</strong>
+                          <strong>{{ $errors->first('location') }}</strong>
                       </span>
                   @endif
                 </div>

@@ -17,6 +17,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 
 	Route::resource('angsuran','AngsuranController');
 
+	Route::group([
+		'prefix'=>'master',
+		'as'=>'master.'
+	], function(){
+		Route::resource('perumahan','PerumahanController');
+	});
+
 });
 
 Route::group(['prefix'=>'user','as'=>'user.'], function(){
@@ -24,6 +31,13 @@ Route::group(['prefix'=>'user','as'=>'user.'], function(){
 	Route::resource('/profile','UserProfileController',['only' => ['show','update']]);
 
 	Route::resource('documents','UploadDocumentController')	;
+
+	Route::resource('rumah','RumahController',['only' => 'show']);
+
+	Route::get('/booking/{id}',[
+		'as'	=>	'booking.rumah',
+		'uses'	=>	'BookingController@booking'
+	]);
 	
 });
 

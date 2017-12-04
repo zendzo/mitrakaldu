@@ -2,6 +2,76 @@
 
 @section('content')
 <div class="row">
+  <section class="invoice">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-home"></i> Rumah : {{ $booked_item->type->type }},Blok {{ $booked_item->block }}.
+            <small class="pull-right">Date: {{ Date('d/m/Y') }}</small>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          Data Rumah :
+          <address>
+            <strong>{{ $booked_item->perumahan->nama }} - {{ $booked_item->perumahan->alamat }}</strong>
+            <strong>{{ $booked_item->type->type }}, {{ $booked_item->block }}.</strong><br>
+            Blok {{ $booked_item->block }} No. {{ $booked_item->no }}<br>
+            Subisidi : {{ $booked_item->subisidi }}<br>
+            Harga : {{ $booked_item->harga }}<br>
+            DP (10%) : {{ $booked_item->deposit }}<br>
+            Angsuran : {{ $booked_item->angsuran }}<br>
+            @isset ($booked_item->bookedBy)
+                Calon Pembeli  : <a href="{{ url('/user/profile',$booked_item->bookedBy->id) }}">{{ $booked_item->bookedBy->first_name }}</a><br>
+            @endisset
+          </address>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 ">
+          <img src="{{ asset($booked_item->location) }}" alt="" style="width: 100%;">
+        </div>
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Cicilan Ke :</th>
+              <th>Kode Pembayaran :</th>
+              <th>Tanggal Tempo:</th>
+              <th>Tanggal Bayar:</th>
+              <th>Verifikasi :</th>
+              <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+              @forelse ($booked_item->cicilan as $cicilan)
+                <tr>
+                  <td>1</td>
+                  <td>{{ $cicilan->kode }}</td>
+                  <td>{{ $cicilan->tanggal_tempo }}</td>
+                  <td>{{ $cicilan->tanggal_bayar }}</td>
+                  <td>{{ $cicilan->completed }}</td>
+                  <td>{{ $cicilan->jumlah }}</td>
+                </tr>
+              @empty
+                {{-- empty expr --}}
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+</section>
+</div>
+<div class="row">
         <div class="col-xs-12">
           <div class="box box-info">
             <div class="box-header">
@@ -27,6 +97,7 @@
                   <th>Tanggal Upload</th>
                   <th>Status</th>
                   <th>Keterangan</th>
+                  <th>Docs.</th>
                 </tr>
                 @forelse ($RD as $r)
                   <tr>
@@ -41,6 +112,13 @@
                       @endif
                     </td>
                     <td>{{ $r->keterangan }}</td>
+                    <td>
+                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#documentModalDialog-{{ $r->id }}">
+                        <i class="fa fa-envelope"></i>
+                      </a>
+                    </td>
+
+                    @include('form_partials.document_modal_dialog')
                  </tr>
                 @empty
                 <tr>

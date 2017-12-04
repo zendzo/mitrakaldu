@@ -16,6 +16,7 @@ class CreateRumahsTable extends Migration
         Schema::create('rumahs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rumah_type_id');
+            $table->integer('perumahan_id');
             $table->string('block');
             $table->integer('no');
             $table->boolean('subsidi')->nullable()->default(false);
@@ -23,7 +24,7 @@ class CreateRumahsTable extends Migration
             $table->integer('deposit')->nullable();
             $table->integer('angsuran')->nullable();
             $table->integer('booked_by')->nullable();
-            $table->string('upload')->nullable();
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

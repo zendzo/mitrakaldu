@@ -7,7 +7,7 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form role="form" action="{{ route('user.documents.store') }}" method="POST">
+  <form role="form" action="{{ route('user.documents.store') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="box-body">
 

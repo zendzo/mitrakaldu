@@ -35,6 +35,7 @@
         @include('admin.menu_pengguna')
         @include('admin.menu_rumah')
         @include('admin.menu_angsuran')
+        @include('admin.menu_master_data')
       @endif
 
       <!-- user menu -->

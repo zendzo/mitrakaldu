@@ -12,17 +12,18 @@ class RumahTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 10; $i++) { 
+        for ($i=1; $i < 5; $i++) { 
         	$harga = 125000000;
         	$angsuran = $harga * 0.1 / 10;
         	Rumah::create([
-        		'rumah_type_id'	=>	1,
+                'rumah_type_id' =>  1,
+        		'perumahan_id'	=>	1,
 				'block'	=>	'A',
 				'no'	=>	$i,
 				'subsidi'	=> true,
 				'harga'		=>	$harga,
-				'booked_by' => $i,
-				'upload'	=> 'test',
+				'booked_by' => null,
+				'location'	=> 'test',
         	]);
         }
 

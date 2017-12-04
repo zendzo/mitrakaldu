@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+// use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use App\RequirementDocument;
 use App\DocumentType;
 use Carbon\Carbon;
+
+use \Input as Input;
 
 class UploadDocumentController extends Controller
 {
@@ -43,13 +45,25 @@ class UploadDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();                    
 
         try {
+
+            if ($request->hasFile('location')) {
+                $fileName = md5(rand(0,2000)).'.'.$request->file('location')->getClientOriginalExtension();
+
+                $folderImage = config('settings.folder_upload_location').Carbon::now(new \DateTimeZone('Asia/Jakarta'))
+                            ->toDateString()."-".Auth::user()->fullName()."/";
+
+                $file = $request->file('location');
+
+                $file->move(public_path($folderImage), $fileName);
+            }
+
             RequirementDocument::create([
                 'user_id'   =>  Auth::id(),
                 'document_type_id'  =>  $input['document_type_id'],
-                'location'  =>  $input['location'],
+                'location'  =>  $folderImage.$fileName,
                 'keterangan'  =>  $input['keterangan'],
             ]);
 

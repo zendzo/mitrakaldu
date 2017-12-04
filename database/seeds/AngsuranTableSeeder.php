@@ -18,12 +18,13 @@ class AngsuranTableSeeder extends Seeder
 
         foreach (range(1,10) as $index) {
             Angsuran::create([
-				'user_id'	=>	$index,
-                'rumah_id'  =>  $index,
+				'user_id'	=>	2,
+                'rumah_id'  =>  2,
 				'kode'	=>	strtoupper(str_random('6')),
 				'jumlah'	=>	1250000,
 				'completed'	=>	false,
-				'tangal_tempo'	=>	$faker->DateTime,
+                'tanggal_tempo' =>  $faker->DateTime,
+				'tanggal_bayar'	=>	$faker->DateTime,
             ]);
         }
 

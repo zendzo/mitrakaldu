@@ -20,7 +20,8 @@ class CreateAngsuransTable extends Migration
             $table->string('kode',8);
             $table->integer('jumlah');
             $table->boolean('completed')->nullable()->default(false);
-            $table->date('tangal_tempo');
+            $table->date('tanggal_tempo');
+            $table->date('tanggal_bayar');
             $table->timestamps();
         });
     }

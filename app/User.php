@@ -70,6 +70,11 @@ class User extends Authenticatable
 
     public function rumah()
     {
-        return $this->hasOne('App\Rumah');
+        return $this->hasOne('App\Rumah','booked_by');
+    }
+
+    public function angsuran()
+    {
+        return $this->hasMany('App\Angsuran');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\RequirementDocument;
+use App\Rumah;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,14 @@ class HomeController extends Controller
 
         $RD = Auth::user()->requirementDocuments;
 
-        return view('home',compact(['page_title','RD']));
+        $booked_item = Auth::user()->rumah;
+
+        $rumah = Rumah::whereNull('booked_by')->get();
+
+        if (!is_null(Auth::user()->rumah)) {
+            return view('home',compact(['page_title','RD','booked_item']));
+        }else{
+            return view('user.index',compact(['page_title','rumah']));
+        }
     }
 }

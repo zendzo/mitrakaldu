@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Rumah;
 
 class RumahController extends Controller
@@ -42,23 +44,35 @@ class RumahController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $rumah = new Rumah;
+
+        // $rumah = new Rumah;
 
         // $harga = $input['harga'];
         // $deposit = $harga * 0.1;
         // $angsuran = $deposit / 10;
 
         try {
-            $rumah->rumah_type_id = $input['rumah_type_id'];
-            $rumah->block = $input['block'];
-            $rumah->no = $input['no'];
-            $rumah->subsidi = $input['subsidi'];
-            $rumah->harga = $input['harga'];
-            // $rumah->deposit = $deposit;
-            // $rumah->angsuran = $angsuran;
-            $rumah->upload = $input['upload'];
 
-            $rumah->save();
+           if ($request->hasFile('location')) {
+                $fileName = md5(rand(0,2000)).'.'.$request->file('location')->getClientOriginalExtension();
+
+                $folderImage = config('settings.folder_upload_location').Carbon::now(new \DateTimeZone('Asia/Jakarta'))
+                            ->toDateString()."-".Auth::user()->fullName()."/";
+
+                $file = $request->file('location');
+
+                $file->move(public_path($folderImage), $fileName);
+            }
+
+            Rumah::create([
+                'rumah_type_id' => $input['rumah_type_id'],
+                'perumahan_id'  =>  $input['perumahan_id'],
+                'block' => $input['block'],
+                'no' => $input['no'],
+                'subsidi' => $input['subsidi'],
+                'harga' => $input['harga'],
+                'location' => $folderImage.$fileName,
+            ]);
 
             return redirect()->route('admin.rumah.index')
                             ->with('message','Data Telah Tersimpan')
@@ -128,6 +142,7 @@ class RumahController extends Controller
 
         try {
             $rumah->update($input);
+
             return redirect()->route('admin.rumah.index')
                             ->with('message','Data Berhasil Diupdate!')
                             ->with('status','success')
