@@ -17,6 +17,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 
 	Route::resource('angsuran','AngsuranController');
 
+	Route::resource('documents','DocumentController');
+
+	Route::get('documents/approved/{id}',[
+		'as'	=>	'documents.approved',
+		'uses'	=>	'DocumentController@approved'
+	]);
+
 	Route::group([
 		'prefix'=>'master',
 		'as'=>'master.'

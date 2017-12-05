@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 
 use App\RumahType;
 use App\Perumahan;
+use App\RequirementDocument;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
             View::share('type_rumah', RumahType::all());
 
             View::share('perumahan_id', Perumahan::all());
+
+            View::share('documents_new', RequirementDocument::whereApproved('false'));
+
+            View::share('documents_approved', RequirementDocument::whereApproved('true'));
         
         }
     }

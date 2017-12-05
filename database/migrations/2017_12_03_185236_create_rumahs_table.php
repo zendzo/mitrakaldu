@@ -21,10 +21,9 @@ class CreateRumahsTable extends Migration
             $table->integer('no');
             $table->boolean('subsidi')->nullable()->default(false);
             $table->integer('harga');
-            $table->integer('deposit')->nullable();
-            $table->integer('angsuran')->nullable();
             $table->integer('booked_by')->nullable();
             $table->string('location')->nullable();
+            $table->boolean('document_approved')->nullable()->default(false);
             $table->timestamps();
         });
     }

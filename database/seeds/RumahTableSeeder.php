@@ -23,7 +23,7 @@ class RumahTableSeeder extends Seeder
 				'subsidi'	=> true,
 				'harga'		=>	$harga,
 				'booked_by' => null,
-				'location'	=> 'test',
+				'location'	=> 'images/data/2017-12-04-Administrator System/285ab9448d2751ee57ece7f762c39095.jpg',
         	]);
         }
 
