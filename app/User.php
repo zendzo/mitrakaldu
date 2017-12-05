@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Angsuran');
     }
+
+    public function routeNotificationForSmsGateway()
+    {
+        return $this->phone;
+    }
 }

@@ -56,7 +56,13 @@
                   <td>{{ $cicilan->kode }}</td>
                   <td>{{ $cicilan->tanggal_tempo }}</td>
                   <td>{{ $cicilan->tanggal_bayar }}</td>
-                  <td>{{ $cicilan->completed }}</td>
+                  <td>
+                    @if ($cicilan->completed)
+                      <a href="#" class="btn btn-success" style="width: 100%;">Verifikasi</a>
+                    @else
+                      <a href="#" class="btn btn-danger" style="width: 100%;">Belum Verifikasi</a>
+                    @endif
+                  </td>
                   <td>{{ $cicilan->jumlah }}</td>
                 </tr>
               @empty

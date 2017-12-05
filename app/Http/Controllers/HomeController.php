@@ -39,8 +39,13 @@ class HomeController extends Controller
 
         $rumah = Rumah::whereNull('booked_by')->get();
 
+        $KK = RequirementDocument::whereUserId(Auth::id())->where('document_type_id',1)->get();
+
+        $KTP = RequirementDocument::whereUserId(Auth::id())->where('document_type_id',2)->get();
+
+
         if (!is_null(Auth::user()->rumah)) {
-            return view('home',compact(['page_title','RD','booked_item']));
+            return view('home',compact(['page_title','RD','booked_item','KTP','KK']));
         }else{
             return view('user.index',compact(['page_title','rumah']));
         }

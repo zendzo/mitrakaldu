@@ -21,7 +21,7 @@
                   <td>Completed</td>
                   <td>Tgl. Temp</td>
                   <td>Tgl. Bayar</td>
-                  <td>Action</td>
+                  <td>Tagihan</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,15 +42,9 @@
                       <td>{{ $item->tanggal_bayar }}</td>
                       <!-- button action -->
                       <td width="10%" class="text-center">
-                        <a class="btn btn-xs btn-info" href="#" data-toggle="modal" data-target="#angsuranModalDialog-{{ $item->id }}">
-                          <span class="fa fa-info fa-fw"></span>
+                        <a class="btn btn-primary" href="{{ route('admin.angsuran.invoice',$item->id) }}">
+                          <span class="fa fa-send fa-fw"></span>
                         </a>
-
-                        <a class="btn btn-xs btn-primary" href="{{ route('admin.angsuran.approved',$item->id) }}">
-                          <span class="fa fa-check fa-fw"></span>
-                        </a>
-
-                        @include('form_partials.angsuran_modal_dialog')
                       </td>
                     </tr>
                   @endforeach
@@ -58,9 +52,6 @@
               </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a class="btn btn-success" href="{{ route('admin.rumah.create')}}"><span class="fa fa-plus fa-fw"></span>&nbsp;Tambah Baru</a>
-            </div>
           </div>
         </div>
         <!-- /.col -->

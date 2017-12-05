@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RequirementDocument;
 
+use App\Notifications\DocumentApprovedNotification;
+
 class DocumentController extends Controller
 {
     /**
@@ -93,6 +95,9 @@ class DocumentController extends Controller
 
         try {
             $document->approved = true;
+
+            $document->user->notify(new DocumentApprovedNotification($document));
+            
             $document->save();
 
            return redirect()->back()

@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'smsgateway' => [
+        'email' => env('SMSGATEWAY_EMAIL'),
+        'password' => env('SMSGATEWAY_PASSWORD'),
+        'device' => env('SMSGATEWAY_DEVICE'),
+    ],
+
 ];

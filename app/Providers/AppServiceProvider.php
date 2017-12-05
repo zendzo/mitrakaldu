@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\RumahType;
 use App\Perumahan;
 use App\RequirementDocument;
+use App\Angsuran;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
             View::share('documents_new', RequirementDocument::whereApproved('false'));
 
             View::share('documents_approved', RequirementDocument::whereApproved('true'));
+
+            View::share('angsuran_new',Angsuran::whereCompleted('false'));
+
+            View::share('angsuran_completed',Angsuran::whereCompleted('true'));
         
         }
     }

@@ -9,7 +9,7 @@
 	      	<img src="{{ asset($item->location) }}" class="img-thumbnail img-responsive" style="height: 250px; width: 350px;">
 	      </a>
 	      <div class="caption">
-	        <h3>{{ $item->perumahan->nama }}</h3>
+	        <h3>{{ $item->perumahan->nama }} Blok.{{ $item->block }} No.{{ $item->no }}</h3>
 	        <p>Lokasi :{{ $item->perumahan->alamat }}</p>
 	        <h4></h4>
 	        <h4 class="text-primary">Rp.<span class="highlight">1</span>{{ $item->harga }}</h4>

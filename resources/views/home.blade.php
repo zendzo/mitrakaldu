@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-home"></i> Rumah : {{ $booked_item->type->type }},Blok {{ $booked_item->block }}.
+            <i class="fa fa-home"></i> Rumah : {{ $booked_item->type->type }},Blok. {{ $booked_item->block }} No. {{ $booked_item->no }}
             <small class="pull-right">Date: {{ Date('d/m/Y') }}</small>
           </h2>
         </div>
@@ -33,44 +33,89 @@
       </div>
       <!-- /.row -->
 
-      <!-- Table row -->
+<!-- Table row -->
+<div class="row">
+  <div class="col-xs-12 ">
+    <img src="{{ asset($booked_item->location) }}" alt="" style="width: 100%;">
+  </div>
+  <div class="col-xs-12 table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Cicilan Ke :</th>
+        <th>Kode Pembayaran :</th>
+        <th>Tanggal Bayar:</th>
+        <th>Tanggal Tempo:</th>
+        <th>Verifikasi :</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+      <tbody>
+        @forelse ($booked_item->cicilan as $cicilan)
+          <tr>
+            <td>1</td>
+            <td>{{ $cicilan->kode }}</td>
+            <td>{{ $cicilan->tanggal_bayar }}</td>
+            <td>{{ $cicilan->tanggal_tempo }}</td>
+            <td>
+              @if ($cicilan->completed)
+                <a href="#" class="btn btn-success" style="width: 100%;">Verifikasi</a>
+              @else
+                <a href="#" class="btn btn-danger" style="width: 100%;"> Belum Verifikasi</a>
+              @endif
+            </td>
+            <td>{{ $cicilan->jumlah }}</td>
+          </tr>
+        @empty
+          {{-- empty expr --}}
+        @endforelse
+      </tbody>
+    </table>
+  </div>
+  <!-- /.col -->
+</div>
+
       <div class="row">
-        <div class="col-xs-12 ">
-          <img src="{{ asset($booked_item->location) }}" alt="" style="width: 100%;">
+        <!-- accepted payments column -->
+        <div class="col-xs-6">
+          <p class="lead">Keterangan Pembayaran:</p>
+
+          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+            Jika Dokumen Persyaratan Telah Diupload dan Diverifikasi, Pembayaran bisa di lakukan.
+            Tangggal Pembayaran Selanjutnya Dihitung Dari Satu Bulan Setelah Pembayaran Pertama.
+          </p>
         </div>
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th>Cicilan Ke :</th>
-              <th>Kode Pembayaran :</th>
-              <th>Tanggal Tempo:</th>
-              <th>Tanggal Bayar:</th>
-              <th>Verifikasi :</th>
-              <th>Subtotal</th>
-            </tr>
-            </thead>
-            <tbody>
-              @forelse ($booked_item->cicilan as $cicilan)
-                <tr>
-                  <td>1</td>
-                  <td>{{ $cicilan->kode }}</td>
-                  <td>{{ $cicilan->tanggal_tempo }}</td>
-                  <td>{{ $cicilan->tanggal_bayar }}</td>
-                  <td>{{ $cicilan->completed }}</td>
-                  <td>{{ $cicilan->jumlah }}</td>
-                </tr>
-              @empty
-                {{-- empty expr --}}
-              @endforelse
-            </tbody>
-          </table>
+        <!-- /.col -->
+        <div class="col-xs-6">
+          <p class="lead">Rekapitulasi s/d {{ Date('d-m-Y') }}</p>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th>Total:</th>
+                <td>{{ $booked_item->cicilan->sum('jumlah') }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
+
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-xs-12">
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+            <a href="{{ route('user.angsuran.create') }}" class="btn btn-success pull-right">
+              <i class="fa fa-credit-card"></i> Upload Pembayaran
+            </a>
+        </div>
+      </div>
+
+<!-- /.row -->
 </section>
 </div>
+
 <div class="row">
         <div class="col-xs-12">
           <div class="box box-info">
