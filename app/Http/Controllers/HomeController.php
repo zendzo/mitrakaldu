@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         $rumah = Rumah::whereNull('booked_by')->get();
 
-        $KK = RequirementDocument::whereUserId(Auth::id())->where('document_type_id',1)->get();
+        $KK = RequirementDocument::whereUserId(Auth::id())->where('document_type_id',1)->first();
 
         $KTP = RequirementDocument::whereUserId(Auth::id())->where('document_type_id',2)->get();
 
