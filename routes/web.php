@@ -39,6 +39,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 		'uses'	=>	'AngsuranController@approved'
 	]);
 
+	Route::get('angsuran/rejected/{id}',[
+		'as'	=>	'angsuran.rejected',
+		'uses'	=>	'AngsuranController@rejected'
+	]);
+
 	Route::get('angsuran/invoice/{id}',[
 		'as'	=>	'angsuran.invoice',
 		'uses'	=>	'AngsuranController@invoice'

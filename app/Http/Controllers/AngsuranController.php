@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\AngsuranCompletedNotification;
+use App\Notifications\AngsuranRejectedNotification;
 use App\Notifications\AngsuranInvoiceNotification;
 use App\Angsuran;
 use Carbon\Carbon;
@@ -137,6 +138,32 @@ class AngsuranController extends Controller
             $angsuran->completed = true;
 
             $angsuran->user->notify(new AngsuranCompletedNotification($angsuran));
+            
+            $angsuran->save();
+
+           return redirect()->back()
+                ->with('message', 'Data Telah Tersimpan!')
+                ->with('status','success')
+                ->with('type','success');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('message', $e->getMessage())
+                ->with('status','Something Wrong!')
+                ->with('type','error');
+        }
+    }
+
+    public function rejected($id)
+    {
+        $angsuran = Angsuran::findOrFail($id);
+
+        // return $angsuran;
+
+        try {
+            $angsuran->completed = false;
+
+            $angsuran->user->notify(new AngsuranRejectedNotification($angsuran));
             
             $angsuran->save();
 

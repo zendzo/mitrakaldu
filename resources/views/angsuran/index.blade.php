@@ -50,6 +50,10 @@
                           <span class="fa fa-check fa-fw"></span>
                         </a>
 
+                        <a class="btn btn-xs btn-danger" href="{{ route('admin.angsuran.rejected',$item->id) }}">
+                          <span class="fa fa-ban fa-fw"></span>
+                        </a>
+
                         @include('form_partials.angsuran_modal_dialog')
                       </td>
                     </tr>
