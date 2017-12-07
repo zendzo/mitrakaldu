@@ -29,6 +29,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 		'uses'	=>	'DocumentController@approved'
 	]);
 
+	Route::get('documents/rejected/{id}',[
+		'as'	=>	'documents.rejected',
+		'uses'	=>	'DocumentController@rejected'
+	]);
+
 	Route::get('angsuran/approved/{id}',[
 		'as'	=>	'angsuran.approved',
 		'uses'	=>	'AngsuranController@approved'

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\RequirementDocument;
 
 use App\Notifications\DocumentApprovedNotification;
+use App\Notifications\DocumentRejectedNotification;
 
 class DocumentController extends Controller
 {
@@ -97,6 +98,30 @@ class DocumentController extends Controller
             $document->approved = true;
 
             $document->user->notify(new DocumentApprovedNotification($document));
+            
+            $document->save();
+
+           return redirect()->back()
+                ->with('message', 'Data Telah Tersimpan!')
+                ->with('status','success')
+                ->with('type','success');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('message', $e->getMessage())
+                ->with('status','Something Wrong!')
+                ->with('type','error');
+        }
+    }
+
+    public function rejected($id)
+    {
+        $document = RequirementDocument::findOrFail($id);
+
+        try {
+            $document->approved = false;
+
+            $document->user->notify(new DocumentRejectedNotification($document));
             
             $document->save();
 

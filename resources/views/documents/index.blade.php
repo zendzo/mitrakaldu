@@ -52,9 +52,11 @@
                     </td>
                     <td>
                     	@if (!$r->approved)
-                    		<a href="{{ route('admin.documents.approved',$r->id) }}" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                        <a href="{{ route('admin.documents.approved',$r->id) }}" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                    		<a href="{{ route('admin.documents.rejected',$r->id) }}" class="btn btn-danger"><i class="fa fa-ban"></i></a>
                     	@else
-                    		<a href="#" class="btn btn-warning disabled"><i class="fa fa-check"></i></a>
+                        <a href="#" class="btn btn-warning disabled"><i class="fa fa-check"></i></a>
+                    		<a href="#" class="btn btn-danger disabled"><i class="fa fa-ban"></i></a>
                     	@endif
                     </td>
 
