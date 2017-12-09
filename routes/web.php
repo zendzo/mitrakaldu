@@ -53,8 +53,22 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'], function(
 		'prefix'=>'master',
 		'as'=>'master.'
 	], function(){
+
 		Route::resource('perumahan','PerumahanController');
+
+		Route::resource('type-rumah','TypeRumahController');
+
 	});
+
+	Route::get('laporan',[
+			'as'	=>	'laporan.index',
+			'uses'	=>	'LaporanController@index'
+		]);
+
+	Route::get('laporan/print',[
+			'as'	=>	'laporan.print',
+			'uses'	=>	'LaporanController@print'
+		]);
 
 });
 

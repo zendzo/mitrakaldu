@@ -22,6 +22,7 @@ class CreateAngsuransTable extends Migration
             $table->boolean('completed')->nullable()->default(false);
             $table->date('tanggal_bayar');
             $table->date('tanggal_tempo')->nullabel();
+            $table->boolean('remainder_sent')->nullabel()->default(false);
             $table->string('location')->nullable();
             $table->timestamps();
         });

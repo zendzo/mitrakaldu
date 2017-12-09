@@ -37,6 +37,7 @@
         @include('admin.menu_dokumen')
         @include('admin.menu_angsuran')
         @include('admin.menu_master_data')
+        @include('admin.menu_laporan')
       @endif
 
       <!-- user menu -->

@@ -6,5 +6,7 @@
 </a>
   <ul class="treeview-menu ">
     <li class="{{ active(['admin.master.perumahan.index']) }}"><a href="{{ route('admin.master.perumahan.index') }}"><i class="fa fa-check"></i>Daftar Perumahan</a></li>
+
+    <li class="{{ active(['admin.master.type-rumah.index']) }}"><a href="{{ route('admin.master.type-rumah.index') }}"><i class="fa fa-check"></i>Type Rumah</a></li>
   </ul>
 </li>
