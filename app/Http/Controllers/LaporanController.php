@@ -15,7 +15,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $page_title = "Laporan";
+        $page_title = "Laporan Unit Rumah Calon Pembeli dan Angsuran";
 
         $unitrumah = Rumah::all();
 

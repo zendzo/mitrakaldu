@@ -29,7 +29,8 @@
     <div class="col-xs-12">
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3>{{ config('app.name') }}</h3><br>
+          <h3>{{ config('app.name') }}</h3>
+          <h5>JL. KIJANG LAMA BLOCK B NO. 09</h5>
           <h4>{{ $page_title }}</h4>
         </div>
         <!-- /.box-header -->

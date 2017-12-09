@@ -49,7 +49,7 @@ class DocumentApprovedNotification extends Notification
 
         $document_type = $doc->name;
 
-        $content = "Sdr. $user Dokument $document_type Anda Telah Diverifikasi";
+        $content = "Sdr. $user Dokument Persyaratan Anda Telah Diverifikasi";
         
         return (new SmsGatewayMessage)->content($content);
     }
