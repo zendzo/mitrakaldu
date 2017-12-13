@@ -21,6 +21,7 @@
                   <td>Completed</td>
                   <td>Tgl. Temp</td>
                   <td>Tgl. Bayar</td>
+                  <td>Remainder</td>
                   <td>Action</td>
                 </tr>
                 </thead>
@@ -40,6 +41,13 @@
                       </td>
                       <td>{{ $item->tanggal_tempo }}</td>
                       <td>{{ $item->tanggal_bayar }}</td>
+                      <td>
+                        @if ($item->remainder_sent)
+                          <a href="#" class="btn btn-xs btn-success" style="width: 100%;"><i class="fa fa-fw fa-check"></i></a>
+                        @else
+                          <a href="#" class="btn btn-xs btn-danger" style="width: 100%;"><i class="fa fa-fw fa-times"></i></a>
+                        @endif
+                      </td>
                       <!-- button action -->
                       <td width="10%" class="text-center">
                         <a class="btn btn-xs btn-info" href="#" data-toggle="modal" data-target="#angsuranModalDialog-{{ $item->id }}">

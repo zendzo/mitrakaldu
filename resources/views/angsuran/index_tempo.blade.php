@@ -21,12 +21,13 @@
                   <td>Completed</td>
                   <td>Tgl. Temp</td>
                   <td>Tgl. Bayar</td>
+                  <td>Remainder</td>
                   <td>Tagihan</td>
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($angsuran as $item)
-                    <tr>
+                  @forelse ($angsurans as $item)
+                  <tr>
                       <td><a href="{{ url('/user/profile',$item->user->id) }}">{{ $item->user->first_name }}</a></td>
                       <td><a href="{{ route('admin.rumah.show',$item->rumah->id) }}">{{ $item->rumah->type->type }} Blok .{{ $item->rumah->block }} No .{{ $item->rumah->no }}</a></td>
                       <td>{{ $item->kode }}</td>
@@ -40,6 +41,13 @@
                       </td>
                       <td>{{ $item->tanggal_tempo }}</td>
                       <td>{{ $item->tanggal_bayar }}</td>
+                      <td>
+                        @if ($item->remainder_sent)
+                          <a href="#" class="btn btn-xs btn-success" style="width: 100%;"><i class="fa fa-fw fa-check"></i></a>
+                        @else
+                          <a href="#" class="btn btn-xs btn-danger" style="width: 100%;"><i class="fa fa-fw fa-times"></i></a>
+                        @endif
+                      </td>
                       <!-- button action -->
                       <td width="10%" class="text-center">
                         <a class="btn btn-primary" href="{{ route('admin.angsuran.invoice',$item->id) }}">
@@ -47,7 +55,11 @@
                         </a>
                       </td>
                     </tr>
-                  @endforeach
+                  @empty
+                  <tr>
+                    <td colspan="8"><h3 class="text-center">Tidak Ada Angsuran Jatuh Tempo s/d {{ Date('d/m/Y') }}</h3></td>
+                  </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>

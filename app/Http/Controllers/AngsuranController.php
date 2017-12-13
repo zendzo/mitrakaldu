@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\AngsuranCompletedNotification;
 use App\Notifications\AngsuranRejectedNotification;
 use App\Notifications\AngsuranInvoiceNotification;
+use App\Notifications\RemainderAngsuranNotification;
 use App\Angsuran;
 use Carbon\Carbon;
 
@@ -207,8 +208,26 @@ class AngsuranController extends Controller
     {
         $page_title = "Daftar Angsuran";
 
-        $angsuran = Angsuran::where('tanggal_bayar','<',Carbon::now()->subMonth())->get();
+        $angsurans = Angsuran::where('tanggal_tempo','<',Carbon::now())->get();
 
-        return view('angsuran.index_tempo',compact(['page_title','angsuran']));
+        foreach ($angsurans as $angsuran) {
+            try {
+                $angsuran->user->notify(new RemainderAngsuranNotification($angsuran));
+
+                $angsuran->remainder_sent = true;
+
+                $angsuran->save();
+
+                \Log::info('sms sent to '.$angsuran->user->first_name.' item kode :'.$angsuran->id);
+
+            } catch (\Exception $e) {
+                return redirect()->route('admin.angsuran.tempo')
+                            ->with('message',$e->getMessage())
+                            ->with('status','Something Wrong!')
+                            ->with('type','error');
+            }
+        }
+
+        return view('angsuran.index_tempo',compact(['page_title','angsurans']));
     }
 }
