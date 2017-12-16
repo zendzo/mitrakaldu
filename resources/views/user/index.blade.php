@@ -14,11 +14,14 @@
 	        <h4></h4>
 	        <h4 class="text-primary">Rp.<span class="highlight">1</span>{{ $item->harga }}</h4>
 	        <h5 class="text-success">DP : {{ $item->deposit }}</h5>
+	        <h5 class="text-success">Booking Fee : {{ $item->angsuran }}</h5>
 	        <h5 class="text-success">Cicilan DP : {{ $item->angsuran }}/bln</h5>
 	        <p>
 	        </p>
 	        <p>
-	        	<a class="btn btn-large btn-danger" href="{{ route('user.booking.rumah',$item->id) }}">Booking!</a>
+	        	@if (Auth::check())
+	        		<a class="btn btn-large btn-danger" href="{{ route('user.booking.rumah',$item->id) }}">Booking!</a>
+	        	@endif
 	        	@if ($item->subsidi)
 	        		<button class="btn btn-info disabled">SUBSIDI</button>
 	        	@else

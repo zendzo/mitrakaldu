@@ -76,6 +76,7 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('rumah-tersedia.index') }}" style="background: red; margin: 20px;">DAFTAR RUMAH TERSEDIA</a>
                     @endauth
                 </div>
             @endif

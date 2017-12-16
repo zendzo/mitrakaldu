@@ -104,3 +104,5 @@ Route::get('test/sms', function(){
 
 	$user->notify(new App\Notifications\TestSmsNotification);
 });
+
+Route::resource('/rumah-tersedia','UserWelcomeController',['only' => ['index','show']]);

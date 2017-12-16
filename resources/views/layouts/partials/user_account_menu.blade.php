@@ -1,33 +1,32 @@
 <!-- User Account Menu -->
 <li class="dropdown user user-menu">
+    @if (Auth::check())
     <!-- Menu Toggle Button -->
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <!-- The user image in the navbar-->
         <img src="{{ asset("AdminLTE/dist/img/user-avatar.png") }}" class="user-image" alt="User Image"/>
         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-        <span class="hidden-xs">{{ Auth::user()->fullName() }}</span>
+        @if (Auth::check())
+            <span class="hidden-xs">{{ Auth::user()->fullName() }}</span>
+        @endif
     </a>
+    @else
+    <!-- Menu Toggle Button -->
+    <a href="{{ route('login') }}">
+        Login
+    </a>
+    @endif
     <ul class="dropdown-menu">
         <!-- The user image in the menu -->
         <li class="user-header">
             <img src="{{ asset("AdminLTE/dist/img/user-avatar.png") }}" class="img-circle" alt="User Image" />
             <p>
-                {{ Auth::user()->fullName() }}
-                <small>{{ Auth::user()->role->name }}</small>
-                <small>{{ Auth::user()->updated_at->diffForHumans() }}</small>
+                @if (Auth::check())
+                    {{ Auth::user()->fullName() }}
+                    <small>{{ Auth::user()->role->name }}</small>
+                    <small>{{ Auth::user()->updated_at->diffForHumans() }}</small>
+                @endif
             </p>
-        </li>
-        <!-- Menu Body -->
-        <li class="user-body">
-            <div class="col-xs-4 text-center">
-                <a href="#">Followers</a>
-            </div>
-            <div class="col-xs-4 text-center">
-                <a href="#">Sales</a>
-            </div>
-            <div class="col-xs-4 text-center">
-                <a href="#">Friends</a>
-            </div>
         </li>
         <!-- Menu Footer-->
         <li class="user-footer">

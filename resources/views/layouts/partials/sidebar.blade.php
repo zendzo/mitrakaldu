@@ -2,7 +2,8 @@
 <aside class="main-sidebar">
 
   <!-- sidebar: style can be found in sidebar.less -->
-  <section class="sidebar">
+  @if (Auth::check())
+    <section class="sidebar">
 
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
@@ -10,9 +11,9 @@
         <img src="{{ asset('AdminLTE/dist/img/user-avatar.png') }}" class="img-circle" alt="User Image" />
       </div>
       <div class="pull-left info">
-        <p>{{ Auth::user()->fullName() }}</p>
-        <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> Type: {{ Auth::user()->role->name }}</a>
+          <p>{{ Auth::user()->fullName() }}</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Type: {{ Auth::user()->role->name }}</a>
       </div>
     </div>
 
@@ -31,20 +32,21 @@
     <ul class="sidebar-menu">
       <li class="header">MENU</li>
       <!-- if user is admin show menu -->
-      @if(Auth::user()->role_id === 1)
-        @include('admin.menu_pengguna')
-        @include('admin.menu_rumah')
-        @include('admin.menu_dokumen')
-        @include('admin.menu_angsuran')
-        @include('admin.menu_master_data')
-        @include('admin.menu_laporan')
-      @endif
+        @if(Auth::user()->role_id === 1)
+          @include('admin.menu_pengguna')
+          @include('admin.menu_rumah')
+          @include('admin.menu_dokumen')
+          @include('admin.menu_angsuran')
+          @include('admin.menu_master_data')
+          @include('admin.menu_laporan')
+        @endif
 
       <!-- user menu -->
-      @if(Auth::user()->role_id != 1)
+        @if(Auth::user()->role_id != 1)
       
-      @endif
+        @endif
     </ul><!-- /.sidebar-menu -->
   </section>
+  @endif
   <!-- /.sidebar -->
 </aside>

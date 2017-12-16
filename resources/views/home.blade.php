@@ -106,9 +106,15 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-            @if (Auth::user()->requirementDocuments->count())
+            @if (Auth::user()->requirementDocuments->count() && $booked_item->cicilan->sum('jumlah') < $booked_item->deposit)
               <a href="{{ route('user.angsuran.create') }}" class="btn btn-success pull-right">
                 <i class="fa fa-credit-card"></i> Upload Pembayaran
+              </a>
+            @endif
+
+            @if ($booked_item->cicilan->sum('jumlah') == $booked_item->deposit)
+              <a href="#" class="btn btn-danger pull-right" style="margin-right: 20px;">
+                <i class="fa fa-credit-card"></i> ANGUSRAN LUNAS
               </a>
             @endif
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\AngsuranCompletedNotification;
+use App\Notifications\AngsuranLunasNotification;
 use App\Notifications\AngsuranRejectedNotification;
 use App\Notifications\AngsuranInvoiceNotification;
 use App\Notifications\RemainderAngsuranNotification;
@@ -48,6 +49,13 @@ class AngsuranController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        if ($input['jumlah'] < Auth::user()->rumah->angsuran) {
+            return redirect()->back()->withInput()
+                            ->with('message','Jumlah Angsuran Kurang dari Ketentuan! Minimal : '.Auth::user()->rumah->angsuran)
+                            ->with('status','Jumlah Pembayaran Kurang')
+                            ->with('type','warning');
+        }
         
         try {
 
@@ -139,7 +147,7 @@ class AngsuranController extends Controller
             $angsuran->completed = true;
 
             $angsuran->user->notify(new AngsuranCompletedNotification($angsuran));
-            
+
             $angsuran->save();
 
            return redirect()->back()
@@ -208,7 +216,7 @@ class AngsuranController extends Controller
     {
         $page_title = "Daftar Angsuran";
 
-        $angsurans = Angsuran::where('tanggal_tempo','<',Carbon::now())->get();
+        $angsurans = Angsuran::where('remainder_sent',false)->where('tanggal_tempo','<',Carbon::now())->get();
 
         foreach ($angsurans as $angsuran) {
             try {
@@ -221,7 +229,7 @@ class AngsuranController extends Controller
                 \Log::info('sms sent to '.$angsuran->user->first_name.' item kode :'.$angsuran->id);
 
             } catch (\Exception $e) {
-                return redirect()->route('admin.angsuran.tempo')
+                return redirect()->back()
                             ->with('message',$e->getMessage())
                             ->with('status','Something Wrong!')
                             ->with('type','error');

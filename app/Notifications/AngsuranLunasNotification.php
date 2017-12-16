@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Nerdify\SmsGateway\SmsGatewayChannel;
 use Nerdify\SmsGateway\SmsGatewayMessage;
 
-class AngsuranCompletedNotification extends Notification
+class AngsuranLunasNotification extends Notification
 {
     use Queueable;
 
@@ -45,27 +45,10 @@ class AngsuranCompletedNotification extends Notification
 
         $kode = $this->angsuran->kode;
 
-        $totalicilan = $this->angsuran->rumah->cicilan->sum('jumlah');
-
-        $totalNow = $totalicilan + $this->angsuran->jumlah;
-
-        $deposit = $this->angsuran->rumah->deposit;
-
-        if ($totalicilan == $deposit) {
-
-            $content = "Sdr. $user Bukti Pembayaran Anda Dengan $kode Telah Diverifikasi! Angsuran Anda Lunas!";
+        $content = "Sdr. $user Bukti Pembayaran Anda Dengan $kode Telah Diverifikasi! Angsuran Anda Lunas!";
         
-            return (new SmsGatewayMessage)->content($content);
-
-        }else{
-
-            $content = "Sdr. $user Bukti Pembayaran Anda Dengan $kode Telah Diverifikasi!";
-        
-            return (new SmsGatewayMessage)->content($content);
-
-        }
+        return (new SmsGatewayMessage)->content($content);
     }
-
 
     /**
      * Get the array representation of the notification.
