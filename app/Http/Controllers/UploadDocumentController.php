@@ -55,7 +55,7 @@ class UploadDocumentController extends Controller
          $messages = $validator->errors();
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)
+            return redirect()->back()->withErrors($validator)->withInputs()
                             ->with('message',$messages->first('location'))
                             ->with('status','File Maks!')
                             ->with('type','error');

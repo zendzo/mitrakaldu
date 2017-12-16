@@ -56,6 +56,21 @@ class AngsuranController extends Controller
                             ->with('status','Jumlah Pembayaran Kurang')
                             ->with('type','warning');
         }
+
+        $input = $request->all();
+
+         $validator = Validator::make($request->all(), [
+            'location' => 'mimes:jpeg,bmp,png|max:2048'
+        ]);
+
+         $messages = $validator->errors();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInputs()
+                            ->with('message',$messages->first('location'))
+                            ->with('status','File Maks!')
+                            ->with('type','error');
+        }
         
         try {
 
