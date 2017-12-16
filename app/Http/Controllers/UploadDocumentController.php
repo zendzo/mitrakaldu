@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\RequirementDocument;
 use App\DocumentType;
 use Carbon\Carbon;
+use Validator;
 
 use \Input as Input;
 
@@ -45,7 +46,21 @@ class UploadDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();                    
+        $input = $request->all();
+
+         $validator = Validator::make($request->all(), [
+            'location' => 'mimes:jpeg,bmp,png|max:2048'
+        ]);
+
+         $messages = $validator->errors();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)
+                            ->with('message',$messages->first('location'))
+                            ->with('status','File Maks!')
+                            ->with('type','error');
+        }
+
 
         try {
 
